@@ -5,8 +5,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Basic packages + cleanup
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	supervisor && \
-	postfix && \
+	supervisor \
+	postfix \
 	sasl2-bin && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
