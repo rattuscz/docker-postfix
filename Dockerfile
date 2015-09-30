@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Basic packages + cleanup
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	supervisor \
+	rsyslog \
 	postfix \
 	sasl2-bin && \
 	apt-get clean && \
@@ -13,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy supervisor configuration
 COPY ./config/supervisor.conf /etc/supervisor/conf.d/supervisord-postfix.conf
+COPY ./config/smtpd.conf /etc/postfix/sasl/smtpd.conf
 
 # postfix startup and config
 COPY ./postfix.sh /opt/postfix.sh
