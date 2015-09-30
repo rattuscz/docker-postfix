@@ -1,5 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 /opt/postfix-configure-sasl.sh
-service postfix start
-# tail -f /var/log/mail.log
+
+# exit cleanly
+trap "{ /usr/sbin/service postfix stop; }" EXIT
+
+/usr/sbin/service postfix start
+
+# don't exit
+sleep infinity
