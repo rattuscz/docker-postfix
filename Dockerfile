@@ -13,14 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy supervisor configuration
-COPY ./config/supervisor.conf /etc/supervisor/conf.d/supervisord-postfix.conf
+COPY ./config/supervisord-postfix.conf /etc/supervisor/conf.d/supervisord-postfix.conf
 COPY ./config/smtpd.conf /etc/postfix/sasl/smtpd.conf
 
 # postfix startup and config
 COPY ./postfix.sh /opt/postfix.sh
 
 # The following options set parameters needed by Postfix to enable, Cyrus-SASL support for authentication of mail clients.
-COPY ./postfix-configure.sh /opt/postfix-configure-sasl.sh
+COPY ./postfix-configure-sasl.sh /opt/postfix-configure-sasl.sh
 
 RUN chmod +x /opt/postfix.sh && \
 	chmod +x /opt/postfix-configure-sasl.sh && \
